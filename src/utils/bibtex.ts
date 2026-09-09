@@ -5,8 +5,8 @@
  * source of truth — add a paper there and it appears on the site.
  *
  * Conventions carried over from the group's bibliography:
- *  - a `*` or `+` suffix on an author's surname marks co-first / co-second
- *    authorship (`Song*, Andrew H`);
+ *  - a `*`, `+` or `†` suffix on an author's surname marks co-first /
+ *    co-second / co-senior authorship (`Song*, Andrew H`);
  *  - `html`, `pdf`, `arxiv`, `github`, `video`, `press` and `blog` fields
  *    become the link row under an entry;
  *  - `preview` (thumbnail) fields are ignored on purpose.
@@ -179,7 +179,7 @@ const parseAuthors = (raw: string): PublicationAuthor[] => {
       first = clean(first);
 
       let mark = '';
-      while (last.endsWith('*') || last.endsWith('+')) {
+      while (last.endsWith('*') || last.endsWith('+') || last.endsWith('†')) {
         mark = last.slice(-1) + mark;
         last = last.slice(0, -1).trim();
       }
