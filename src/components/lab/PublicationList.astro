@@ -1,0 +1,62 @@
+---
+import { publicationsByYear } from '~/data/publications';
+
+const groups = publicationsByYear();
+---
+
+<div class="not-prose space-y-12">
+  {
+    groups.map(({ id, label, items }) => (
+      <section aria-labelledby={`year-${id}`}>
+        <h2
+          id={`year-${id}`}
+          class="mb-5 border-b border-gray-200 pb-2 font-heading text-2xl text-heading dark:border-slate-800"
+        >
+          {label}
+        </h2>
+
+        <ol class="space-y-5">
+          {items.map((pub) => (
+            <li>
+              <h3 class="font-heading text-lg leading-snug text-heading text-balance">{pub.title}</h3>
+
+              <p class="mt-0.5 text-sm leading-normal text-muted">
+                {pub.authors.map((author, index) => (
+                  <>
+                    {index > 0 && ', '}
+                    <span class={author.isPI ? 'font-semibold text-default' : undefined}>
+                      {author.name}
+                      {author.mark}
+                    </span>
+                  </>
+                ))}
+              </p>
+
+              <p class="mt-0.5 text-sm">
+                <span class="italic text-default">{pub.venue}</span>
+                <span class="text-muted">, {pub.year}</span>
+              </p>
+
+              {pub.links && pub.links.length > 0 && (
+                <ul class="mt-1.5 flex flex-wrap gap-2">
+                  {pub.links.map((link) => (
+                    <li>
+                      <a
+                        href={link.href}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        class="inline-flex rounded-full border border-gray-300 px-3 py-0.5 text-xs font-medium text-muted transition hover:border-primary hover:text-primary dark:border-slate-700"
+                      >
+                        {link.label}
+                      </a>
+                    </li>
+                  ))}
+                </ul>
+              )}
+            </li>
+          ))}
+        </ol>
+      </section>
+    ))
+  }
+</div>

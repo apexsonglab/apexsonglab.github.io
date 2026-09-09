@@ -1,0 +1,70 @@
+---
+// Typography comes from Astro's native Fonts API (see `fonts` in
+// astro.config.ts and <Font /> in Layout.astro):
+//   Ovo (serif)     -> headings
+//   Almarai (sans)  -> body, navigation and UI text
+// To switch typefaces, change the `fonts` entries and repoint `--aw-font-*`.
+---
+
+<style is:inline>
+  :root {
+    --aw-font-sans: var(--font-almarai);
+    --aw-font-serif: var(--font-ovo);
+    --aw-font-heading: var(--font-ovo);
+
+    /* MD Anderson red, used sparingly for links and accents. */
+    --aw-color-primary: rgb(159 21 39);
+    --aw-color-secondary: rgb(124 16 30);
+    --aw-color-accent: rgb(31 74 112);
+
+    --aw-color-text-heading: rgb(17 17 17);
+    --aw-color-text-default: rgb(38 38 38);
+    --aw-color-text-muted: rgb(38 38 38 / 68%);
+    --aw-color-bg-page: rgb(255 255 255);
+
+    --aw-color-bg-page-dark: rgb(8 9 10);
+
+    ::selection {
+      background-color: rgb(159 21 39 / 15%);
+    }
+  }
+
+  .dark {
+    --aw-font-sans: var(--font-almarai);
+    --aw-font-serif: var(--font-ovo);
+    --aw-font-heading: var(--font-ovo);
+
+    --aw-color-primary: rgb(232 138 152);
+    --aw-color-secondary: rgb(214 112 128);
+    --aw-color-accent: rgb(147 187 226);
+
+    --aw-color-text-heading: rgb(247 248 248);
+    --aw-color-text-default: rgb(229 236 246);
+    --aw-color-text-muted: rgb(229 236 246 / 66%);
+    --aw-color-bg-page: rgb(8 9 10);
+
+    ::selection {
+      background-color: rgb(232 138 152 / 25%);
+    }
+  }
+
+  /* Match the reference typography: headings set tight in Ovo, body in
+     Almarai at a comfortable reading measure. */
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    font-family: var(--aw-font-heading);
+    font-weight: 400;
+    letter-spacing: -0.02em;
+    line-height: 1.2;
+  }
+
+  body {
+    font-family: var(--aw-font-sans);
+    line-height: 1.5;
+    letter-spacing: 0;
+  }
+</style>

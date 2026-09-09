@@ -1,0 +1,139 @@
+---
+import Layout from '~/layouts/PageLayout.astro';
+import HeroText from '~/components/widgets/HeroText.astro';
+import Section from '~/components/lab/Section.astro';
+
+const metadata = {
+  title: 'Join us',
+};
+---
+
+<Layout metadata={metadata}>
+  <HeroText title="Join us" />
+
+  <Section containerClass="max-w-3xl py-6 pb-12 md:py-8 md:pb-16 lg:pb-20">
+    <div
+      class="prose max-w-none text-default prose-a:text-link prose-a:underline prose-a:underline-offset-2 prose-headings:font-heading prose-headings:font-normal prose-headings:text-heading prose-strong:text-heading dark:prose-invert"
+    >
+      <p>
+        We are always looking for talented and highly-motivated colleagues with a computational background, at all
+        levels, to join the APEX Lab.
+      </p>
+
+      <p>
+        The research group is part of <a href="https://www.mdanderson.org/">UT MD Anderson Cancer Center</a>'s <a
+          href="https://www.mdanderson.org/research/departments-labs-institutes/departments-divisions/translational-molecular-pathology.html"
+          >Department of Translational Molecular Pathology</a
+        > and <a
+          href="https://www.mdanderson.org/research/departments-labs-institutes/institutes/institute-for-data-science-in-oncology.html"
+          >The Institute for Data Science in Oncology</a
+        >.
+      </p>
+
+      <p>
+        Please follow the instructions below and send the requested materials to <strong
+          >asong2 [at] mdanderson [dot] org</strong
+        >. Rice graduate and undergraduate students should send the requested materials to <strong
+          >asong [at] rice [dot] edu</strong
+        >. Due to the high number of emails from prospective trainees, I won't be able to reply to all emails.
+      </p>
+
+      <h2 id="research-agenda">Research agenda</h2>
+
+      <p>
+        The research group is dedicated to building next-generation AI tools for computational pathology, grounded in
+        rigorous principles of statistical inference, with the overarching goal of deciphering multi-scale oncologic
+        complexity. The lab's research will focus on developing state-of-the-art AI models capable of integrating and
+        cross-analyzing diverse data modalities—such as tissue images, spatial transcriptomics, spatial proteomics, and
+        clinical reports—across multiple dimensions of clinical data (2D, 3D, and 4D longitudinal datasets). By
+        combining these innovations with advanced statistical approaches such as Bayesian inference and optimal
+        transport, the lab aims to open new frontiers in computational pathology and precision oncology.
+      </p>
+
+      <p>
+        Successful candidates will have a unique opportunity to contribute to cutting-edge research while shaping the
+        strategic direction of several flagship initiatives at MD Anderson, as it launches mission-critical, well-funded
+        programs in digital and molecular pathology.
+      </p>
+
+      <p>
+        Based in the world's leading cancer center within the largest medical complex in the world, candidates will have
+        direct access to one of the most comprehensive patient tissue and clinical trial datasets. In addition to the
+        vibrant and rich cancer research ecosystem within Houston, candidates will have exciting opportunities to
+        collaborate extensively with external collaborators in academia as well as industrial partners to foster
+        translational impact at scale. MD Anderson also provides a wealth of computational resources, including
+        high-performance computing clusters tailored for biomedical research and on-demand access to the Texas Advanced
+        Computing Center.
+      </p>
+
+      <h2 id="postdoctoral-fellows">Postdoctoral fellows</h2>
+
+      <p>
+        Fully-funded full-time postdoctoral fellow positions are available, where additional mentorship will be provided
+        by Dr. Donna Hansel, the Division Head of Pathology and Laboratory Medicine.
+      </p>
+
+      <p>
+        To be officially considered as a postdoctoral fellow candidate, please apply at <a
+          href="https://jobs.mdanderson.org/search/jobdetails/postdoctoral-fellow---translational-molecular-pathology/5faf60b5-c71c-4afb-bc2d-a5784f195f06"
+          >this link</a
+        >.
+      </p>
+
+      <p>(<strong>IMPORTANT</strong>) In addition to submitting the application, please email the following.</p>
+
+      <ol>
+        <li>
+          Cover letter on the candidate's research interest, career goals, and how this can align with Dr. Song's new
+          research lab direction (2 pages max).
+        </li>
+        <li>CV with reference to GitHub/Hugging Face repository (if available).</li>
+        <li>2–3 representative publications, with a concise description of the candidate's contribution to each.</li>
+        <li>Email addresses for three references.</li>
+      </ol>
+
+      <h2 id="prospective-graduate-students">Prospective graduate students</h2>
+
+      <p>
+        (<strong>MD Anderson</strong>): For prospective graduate students interested in The University of Texas MD
+        Anderson Cancer Center UTHealth Houston Graduate School of Biomedical Sciences, please visit <a
+          href="https://gsbs.uth.edu/about/index.htm">here</a
+        > and apply to the program.
+      </p>
+
+      <p>
+        (<strong>Rice CS</strong>): Graduate students at the Rice University CS program can also be advised by me.
+        Please visit <a href="https://csweb.rice.edu/academics/graduate-programs/phd-program">here</a> and apply to the program
+        by 1/1/2026. Indicate in your SOP that you want to be advised by me.
+      </p>
+
+      <p>
+        In addition to submitting the application, please get in touch with me in advance, with the following materials.
+      </p>
+
+      <ol>
+        <li>
+          A concise cover letter on the candidate's research interest, career goals, and how this can align with the new
+          research lab direction.
+        </li>
+        <li>CV with reference to GitHub/Hugging Face repository (if available).</li>
+        <li>Email addresses for two to three references (if available).</li>
+      </ol>
+
+      <h2 id="current-graduate-students">Current graduate students</h2>
+
+      <p>
+        If you are already a Ph.D./Masters student at MD Anderson GSBS or Rice University and interested in joining the
+        lab, please reach out to me with the materials mentioned above.
+      </p>
+
+      <h2 id="undergraduate-students">Undergraduate students</h2>
+
+      <p>
+        Currently, we are recruiting motivated undergraduate students with a computational background from Rice
+        University. In your email, please explain what projects you have worked on in the past, what courses you have
+        liked the most so far, and what topics you are interested in working on. Please include your CV and transcript.
+      </p>
+    </div>
+  </Section>
+</Layout>

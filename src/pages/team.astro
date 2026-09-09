@@ -1,0 +1,236 @@
+---
+import type { ImageMetadata } from 'astro';
+import { Icon } from 'astro-icon/components';
+
+import Layout from '~/layouts/PageLayout.astro';
+import HeroText from '~/components/widgets/HeroText.astro';
+import Section from '~/components/lab/Section.astro';
+import Image from '~/components/common/Image.astro';
+import { getPermalink } from '~/utils/permalinks';
+
+import portrait from '~/assets/images/andrew-song.jpg';
+
+const metadata = {
+  title: 'Team',
+};
+
+interface Member {
+  name: string;
+  role: string;
+  /** File name inside src/assets/images/team/ — e.g. 'huilin-tai.jpg'. */
+  photo?: string;
+  /** Personal website. */
+  href?: string;
+  bio?: string;
+  note?: string;
+}
+
+// Lab members, in the order they should appear.
+//
+// To add someone: drop their photo in `src/assets/images/team/` and add an
+// entry here. `photo` is just the file name; leave it out and a monogram
+// stands in until a picture is available.
+const members: Member[] = [
+  {
+    name: 'Huilin Tai',
+    role: 'Ph.D. Student, Computer Science, Rice University',
+    photo: 'Huilin.jpg',
+    href: 'https://haleyyy2001.github.io/',
+    note: 'Joined July 2026',
+    bio: 'Huilin is a Ph.D. student in Computer Science at Rice University. Her research develops multimodal models for cancer: how tissue can be represented across imaging, molecular, and clinical modalities, what those joint representations encode, and how much of one modality can be recovered from another. She is also interested in how such models are evaluated and explained. Previously, she received her B.Sc. in Statistics and Computer Science from McGill University and completed a thesis-based M.S. in Computer Science at Columbia University with Professor Mohammed AlQuraishi, where she worked on long-context genome language models. Outside of research, she enjoys squash, sketching, and writing.',
+  },
+  {
+    name: 'Kunpeng (Eric) Zhang',
+    role: 'Ph.D. Student, Computer Science, Rice University',
+    photo: 'kunpeng.jpg',
+    href: 'https://erickunpeng.github.io/',
+    note: 'Joined August 2026',
+    bio: `Kunpeng is a Ph.D. student in Computer Science at Rice University. He is interested in developing multimodal AI and foundation models for biomedical data analysis and clinical decision-making. Previously, he received his B.S. in Computer Science from the University of Washington, where he worked on computational pathology and LLM agents under Professor Sheng Wang. Outside of research, he enjoys badminton and traveling.`,
+  },
+  {
+    name: 'Cristina Almagro-Pérez',
+    role: 'Ph.D. Student, Harvard-MIT Health Sciences and Technology',
+    photo: 'cristina.jpg',
+    href: 'https://cristinaperez9.github.io/',
+    note: 'Co-advised with Dr. Faisal Mahmood',
+    bio: 'Cristina is a Ph.D. Candidate at Harvard-MIT Health Sciences and Technology. She is interested in developing AI tools for 3D pathology and spatial biology data to improve the characterization of the tumor microenvironment and aid in biomarker discovery. Before starting her PhD, she worked on 3D computational pathology applied to micro computed tomography and serial histology for lung and pancreatic cancer at ETH Zurich and Johns Hopkins University. Outside of research, she loves running by the Charles, playing clarinet, and discovering new restaurants.',
+  },
+  {
+    name: 'Julio Orellena Montes',
+    role: 'Research Assistant',
+    photo: 'Julio.jpg',
+    bio: 'Julio received his BSc in Biology from Universidad Peruana Cayetano Heredia in Lima, Peru. His research spans single-cell and spatial transcriptomics, having contributed to studies on immune dynamics and viral latency across labs at UCLA, Weill Cornell Medicine and Northwestern University. His long-term goal is to pursue a PhD in computational pathology.',
+    note: 'Joined September 2026',
+  },
+  {
+    name: 'Nihal Josyula',
+    role: 'Undergraduate student, Computer Science, Carnegie Mellon University',
+    photo: 'Nihal.jpg',
+    note: 'Joined September 2026',
+    bio: 'Nihal is a second-year undergraduate in Computational Biology at Carnegie Mellon University. He is interested in multimodal foundation models and in interpreting and evaluating what they learn. Previously, he worked on deep learning for medical image reconstruction at the NIH National Cancer Institute. Outside of research, he hikes and skis.',
+  },
+];
+
+// Photos are resolved at build time so Astro can optimize them.
+const photoModules = import.meta.glob<{ default: ImageMetadata }>('../assets/images/team/*.{jpg,jpeg,png,webp,avif}', {
+  eager: true,
+});
+
+const photoFor = (file?: string): ImageMetadata | undefined => {
+  if (!file) return undefined;
+  return Object.entries(photoModules).find(([path]) => path.endsWith(`/${file}`))?.[1].default;
+};
+
+const initials = (name: string) =>
+  name
+    .replace(/\(.*?\)/g, '')
+    .trim()
+    .split(/\s+/)
+    .slice(0, 2)
+    .map((part) => part[0])
+    .join('');
+---
+
+<Layout metadata={metadata}>
+  <HeroText title="Team" />
+
+  <Section containerClass="max-w-4xl py-8 md:py-10">
+    <h2 class="mb-6 font-heading text-2xl text-heading">Principal Investigator</h2>
+
+    <div class="grid gap-6 sm:grid-cols-[10rem_1fr] sm:gap-8">
+      <Image
+        src={portrait}
+        alt="Andrew H. Song"
+        class="w-40 rounded-xl object-cover shadow-sm"
+        width={320}
+        height={400}
+        layout="constrained"
+        format="webp"
+      />
+      <div>
+        <h3 class="font-heading text-xl text-heading">Andrew H. Song, Ph.D.</h3>
+        <p class="mt-1 text-sm text-muted">
+          Assistant Professor, Department of Translational Molecular Pathology, UT MD Anderson Cancer Center<br />
+          Adjunct Professor, Department of Computer Science, Rice University
+        </p>
+        <div
+          class="prose prose-sm mt-3 max-w-none text-default prose-a:text-link prose-a:underline prose-a:underline-offset-2 dark:prose-invert"
+        >
+          <p>
+            Andrew is an Assistant Professor in the Department of Translational Molecular Pathology and Division of Pathology and Laboratory Medicine at UT MD Anderson
+            Cancer Center (<a href="https://faculty.mdanderson.org/profiles/andrew_song.html">MDA profile</a>) and an
+            affiliate member in the Institute for Data Science in Oncology. He is also an Adjunct Professor in the
+            Department of Computer Science at Rice University. Previously, he was a postdoctoral research fellow in the Department of Pathology at Brigham and Women's
+            Hospital, working with Professor <a href="https://faisal.ai/">Faisal Mahmood</a
+            >.
+          </p>
+          <p>
+            Further back, he received his Ph.D. from Massachusetts Institute of Technology (MIT) Electrical Engineering
+            and Computer Science (EECS) in 2022, with a focus on neural signal processing, co-advised by Professors{
+              ' '
+            }<a href="https://picower.mit.edu/emery-n-brown">Emery N. Brown</a> (MIT) and <a
+              href="https://crisp.seas.harvard.edu/index.html">Demba Ba</a
+            > (Harvard). He has Bachelor's &amp; M.Eng. degrees, all in EECS, from MIT. He also served in the Republic of Korea Army for two years, during which he was stationed at
+            Tyre, Lebanon as a UN peacekeeping force in Lebanon (UNIFIL) for a year.
+          </p>
+        </div>
+        <p class="mt-2 text-sm text-muted">asong2 [at] mdanderson [dot] org</p>
+        <ul class="mt-4 flex flex-wrap items-center gap-2">
+          <li>
+            <a
+              class="inline-flex rounded-full border border-gray-300 px-3 py-0.5 text-xs font-medium text-muted transition hover:border-primary hover:text-primary dark:border-slate-700"
+              href={getPermalink('/')}>About</a
+            >
+          </li>
+          <li>
+            <a
+              class="inline-flex rounded-full border border-gray-300 px-3 py-0.5 text-xs font-medium text-muted transition hover:border-primary hover:text-primary dark:border-slate-700"
+              href="/assets/pdf/Andrew_H_Song_CV.pdf"
+              target="_blank"
+              rel="noopener noreferrer">CV</a
+            >
+          </li>
+          <li>
+            <a
+              class="inline-flex items-center justify-center rounded-full border border-gray-300 p-1.5 text-muted transition hover:border-primary hover:text-primary dark:border-slate-700"
+              href="https://scholar.google.com/citations?user=1UNlyTcAAAAJ"
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label="Google Scholar"
+              title="Google Scholar"
+            >
+              <Icon name="tabler:school" class="h-4 w-4" />
+            </a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </Section>
+
+  <Section containerClass="max-w-4xl py-8 md:py-10">
+    <h2 class="mb-8 font-heading text-2xl text-heading">Lab members</h2>
+
+    <ul class="space-y-10">
+      {
+        members.map((member) => {
+          const photo = photoFor(member.photo);
+          return (
+            <li class="grid gap-6 border-b border-gray-200 pb-10 last:border-0 last:pb-0 sm:grid-cols-[10rem_1fr] sm:gap-8 dark:border-slate-800">
+              {photo ? (
+                <Image
+                  src={photo}
+                  alt={member.name}
+                  class="w-40 rounded-xl object-cover shadow-sm"
+                  width={320}
+                  height={400}
+                  layout="constrained"
+                  format="webp"
+                />
+              ) : (
+                <span
+                  aria-hidden="true"
+                  class="flex h-40 w-40 items-center justify-center rounded-xl bg-primary/10 font-heading text-4xl text-primary"
+                >
+                  {initials(member.name)}
+                </span>
+              )}
+
+              <div>
+                <h3 class="font-heading text-xl text-heading">{member.name}</h3>
+                <p class="mt-1 text-sm text-muted">{member.role}</p>
+                {member.note && <p class="mt-0.5 text-xs text-muted">{member.note}</p>}
+                {member.bio && <p class="mt-3 text-sm leading-relaxed text-default">{member.bio}</p>}
+                {member.href && (
+                  <ul class="mt-4 flex flex-wrap gap-2">
+                    <li>
+                      <a
+                        class="inline-flex rounded-full border border-gray-300 px-3 py-0.5 text-xs font-medium text-muted transition hover:border-primary hover:text-primary dark:border-slate-700"
+                        href={member.href}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                      >
+                        Website
+                      </a>
+                    </li>
+                  </ul>
+                )}
+              </div>
+            </li>
+          );
+        })
+      }
+    </ul>
+  </Section>
+
+  <Section containerClass="max-w-4xl py-8 pb-12 md:py-10 md:pb-16 lg:pb-20">
+    <div
+      class="rounded-xl border border-primary/25 bg-primary/5 px-5 py-4 text-sm leading-relaxed text-default dark:bg-primary/10"
+    >
+      <strong class="text-heading">The lab is growing.</strong> We are recruiting postdoctoral fellows, graduate students,
+      and undergraduate researchers with a computational background. See <a
+        class="font-medium text-link underline underline-offset-2"
+        href={getPermalink('/join')}>Join us</a
+      >.
+    </div>
+  </Section>
+</Layout>

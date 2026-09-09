@@ -1,0 +1,48 @@
+---
+import { getCollection, render } from 'astro:content';
+
+export interface Props {
+  /** Show only the N most recent items. Omit to show the full archive. */
+  limit?: number;
+}
+
+const { limit } = Astro.props;
+
+const entries = (await getCollection('news', ({ data }) => !data.draft)).sort(
+  (a, b) => b.data.date.valueOf() - a.data.date.valueOf()
+);
+
+const items = await Promise.all(
+  (limit ? entries.slice(0, limit) : entries).map(async (entry) => ({
+    id: entry.id,
+    date: entry.data.date,
+    Content: (await render(entry)).Content,
+  }))
+);
+
+// Dates come from front matter as UTC midnight; format in UTC so the day never shifts.
+const formatter = new Intl.DateTimeFormat('en-US', {
+  year: 'numeric',
+  month: 'short',
+  day: 'numeric',
+  timeZone: 'UTC',
+});
+---
+
+<ol class="not-prose divide-y divide-gray-200 dark:divide-slate-800">
+  {
+    items.map(({ id, date, Content }) => (
+      <li class="grid gap-1 py-4 sm:grid-cols-[8rem_1fr] sm:gap-6">
+        <time datetime={date.toISOString().slice(0, 10)} class="text-sm font-medium text-muted sm:pt-0.5">
+          {formatter.format(date)}
+        </time>
+        <div
+          data-news-id={id}
+          class="prose prose-sm max-w-none text-default prose-a:text-link prose-a:underline prose-a:underline-offset-2 prose-p:my-0 prose-strong:text-heading dark:prose-invert"
+        >
+          <Content />
+        </div>
+      </li>
+    ))
+  }
+</ol>

@@ -1,0 +1,32 @@
+---
+import Layout from '~/layouts/PageLayout.astro';
+import HeroText from '~/components/widgets/HeroText.astro';
+import Section from '~/components/lab/Section.astro';
+import PublicationList from '~/components/lab/PublicationList.astro';
+
+const metadata = {
+  title: 'Publications',
+};
+---
+
+<Layout metadata={metadata}>
+  <HeroText title="Publications" />
+
+  <Section containerClass="max-w-4xl pt-0 pb-6 md:pb-8">
+    <p class="text-sm text-muted">
+      <span class="font-semibold text-default">*</span> Co-first authorship &nbsp;·&nbsp;
+      <span class="font-semibold text-default">+</span> Co-second authorship &nbsp;·&nbsp; A full list is also available on{
+        ' '
+      }<a
+        class="text-link underline underline-offset-2"
+        href="https://scholar.google.com/citations?user=1UNlyTcAAAAJ"
+        target="_blank"
+        rel="noopener noreferrer">Google Scholar</a
+      >.
+    </p>
+  </Section>
+
+  <Section containerClass="max-w-4xl pt-0 pb-12 md:pb-16 lg:pb-20">
+    <PublicationList />
+  </Section>
+</Layout>

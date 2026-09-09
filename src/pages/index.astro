@@ -1,0 +1,40 @@
+---
+import Layout from '~/layouts/PageLayout.astro';
+import HeroText from '~/components/widgets/HeroText.astro';
+import Section from '~/components/lab/Section.astro';
+import NewsList from '~/components/lab/NewsList.astro';
+import { getPermalink } from '~/utils/permalinks';
+
+const metadata = {
+  title: 'APEX Lab — AI for computational pathology',
+  ignoreTitleTemplate: true,
+};
+---
+
+<Layout metadata={metadata}>
+  <HeroText
+    tagline="UT MD Anderson Cancer Center"
+    title="APEX Lab"
+    subtitle="We build next-generation AI tools for computational pathology, grounded in rigorous principles of statistical inference, with the overarching goal of deciphering multi-scale oncologic complexity."
+  />
+
+  <Section containerClass="max-w-4xl py-8 md:py-10 lg:py-12">
+    <div
+      class="rounded-xl border border-primary/25 bg-primary/5 px-5 py-4 text-sm leading-relaxed text-default dark:bg-primary/10"
+    >
+      <strong class="text-heading">We are recruiting.</strong> Talented and motivated computational researchers are invited
+      to join the lab as a postdoctoral fellow or graduate student. See <a
+        class="font-medium text-link underline underline-offset-2"
+        href={getPermalink('/join')}>Join us</a
+      > for details on how to apply.
+    </div>
+  </Section>
+
+  <Section containerClass="max-w-4xl py-8 md:py-10 lg:py-16">
+    <div class="mb-2 flex items-baseline justify-between gap-4">
+      <h2 class="font-heading text-2xl text-heading">Latest news</h2>
+      <a class="text-sm font-medium text-link underline underline-offset-2" href={getPermalink('/news')}>All news</a>
+    </div>
+    <NewsList limit={5} />
+  </Section>
+</Layout>
