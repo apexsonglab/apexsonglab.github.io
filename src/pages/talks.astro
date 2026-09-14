@@ -1,0 +1,54 @@
+---
+import Layout from '~/layouts/PageLayout.astro';
+import HeroText from '~/components/widgets/HeroText.astro';
+import Section from '~/components/lab/Section.astro';
+import { talks } from '~/data/talks';
+
+const metadata = {
+  title: 'Talks',
+};
+
+const monthName = (month: number) =>
+  new Intl.DateTimeFormat('en-US', { month: 'long', timeZone: 'UTC' }).format(Date.UTC(2000, month - 1, 1));
+
+// One table per year, newest year first; entries keep their source order within a year.
+const years = [...new Set(talks.map((talk) => talk.year))].sort((a, b) => b - a);
+const byYear = years.map((year) => ({ year, items: talks.filter((talk) => talk.year === year) }));
+---
+
+<Layout metadata={metadata}>
+  <HeroText title="Invited Talks" />
+
+  <Section containerClass="max-w-4xl pt-0 pb-12 md:pb-16 lg:pb-20">
+    <div class="space-y-10">
+      {
+        byYear.map(({ year, items }) => (
+          <table class="w-full table-fixed border-collapse text-left text-sm md:text-base">
+            <thead>
+              <tr class="border-b-2 border-gray-300 dark:border-slate-600">
+                <th scope="col" class="w-24 py-2 pr-4 text-lg font-bold text-heading md:w-32">
+                  {year}
+                </th>
+                <th scope="col" class="py-2 pr-4 font-semibold text-heading">
+                  Talk
+                </th>
+                <th scope="col" class="w-28 py-2 font-semibold text-heading md:w-36">
+                  Location
+                </th>
+              </tr>
+            </thead>
+            <tbody class="divide-y divide-gray-200 dark:divide-slate-800">
+              {items.map(({ month, event, location }) => (
+                <tr>
+                  <td class="py-3 pr-4 align-top text-muted">{monthName(month)}</td>
+                  <td class="py-3 pr-4 align-top">{event}</td>
+                  <td class="py-3 align-top text-muted">{location}</td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        ))
+      }
+    </div>
+  </Section>
+</Layout>
