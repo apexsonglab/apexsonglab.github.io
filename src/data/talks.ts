@@ -13,7 +13,20 @@ export interface Talk {
 }
 
 export const talks: Talk[] = [
+  // 2027
+  { year: 2027, month: 7, event: 'AACR Special Conference in Cancer Research', location: 'Calgary, Canada' },
+  { year: 2027, month: 5, event: 'HIMA 2027 Workshop', location: 'Minneapolis, USA' },
+  { year: 2027, month: 3, event: 'ENAR 2027 Spring Meeting', location: 'Boston, USA' },
   // 2026
+  { year: 2026, month: 9, event: 'NCI Data Science Seminar Series', location: 'USA' },
+  {
+    year: 2026,
+    month: 9,
+    event: 'MD Anderson Cancer Center Department of Bioinformatics and Computational Biology Seminar',
+    location: 'USA',
+  },
+  { year: 2026, month: 9, event: 'Baylor College of Medicine Data Science Seminar', location: 'USA' },
+  { year: 2026, month: 9, event: 'The AI in Health Conference', location: 'USA' },
   { year: 2026, month: 8, event: 'MD Anderson Cancer Center Department of Epidemiology Seminar', location: 'USA' },
   { year: 2026, month: 6, event: 'Ataraxis AI Invited Seminar', location: 'USA' },
   { year: 2026, month: 5, event: 'MD Anderson Cancer Center Department of Biostatistics Seminar', location: 'USA' },
