@@ -14,7 +14,13 @@ export interface Talk {
 
 export const talks: Talk[] = [
   // 2027
-  { year: 2027, month: 7, event: 'AACR Special Conference in Cancer Research', location: 'Calgary, Canada' },
+  {
+    year: 2027,
+    month: 7,
+    event:
+      'AACR Special Conference in Cancer Research: Harnessing the Power of Next Generation Pathology for Cancer Research',
+    location: 'Calgary, Canada',
+  },
   { year: 2027, month: 5, event: 'HIMA 2027 Workshop', location: 'Minneapolis, USA' },
   { year: 2027, month: 3, event: 'ENAR 2027 Spring Meeting', location: 'Boston, USA' },
   // 2026
